@@ -1,0 +1,108 @@
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+@media (min-width: 52rem) {
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.number {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 3.25rem;
+  line-height: 1;
+  color: var(--coral-ink);
+  font-variant-numeric: lining-nums;
+}
+
+.icon {
+  color: var(--green-700);
+}
+
+.title {
+  font-size: var(--step-2);
+  color: var(--green-950);
+}
+
+.body {
+  color: var(--ink-soft);
+}
+
+/* ---------- Motion ---------- */
+
+.steps {
+  position: relative;
+  isolation: isolate;
+}
+
+/* A connector that draws itself as the steps scroll through the viewport. */
+@media (min-width: 52rem) {
+  .steps::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 3.6rem;
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--coral), var(--amber), var(--green-700));
+    transform-origin: 0 50%;
+    transform: scaleX(clamp(0, calc((0.9 - var(--p, 1)) * 1.1), 1));
+  }
+}
+
+.number {
+  transition:
+    color 300ms ease,
+    -webkit-text-stroke-color 300ms ease;
+}
+
+.icon {
+  transition: transform 500ms var(--ease-spring);
+}
+
+.title {
+  transition: color 300ms ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .step:hover .number {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--coral-ink);
+  }
+
+  .step:hover .icon {
+    transform: translateY(-4px) rotate(-10deg) scale(1.15);
+  }
+
+  .step:hover .title {
+    color: var(--green-700);
+  }
+}

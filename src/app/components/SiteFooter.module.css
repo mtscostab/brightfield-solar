@@ -1,0 +1,43 @@
+.footer {
+  padding-block: 3rem;
+  background: var(--green-950);
+  color: var(--on-green-soft);
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: var(--on-green);
+}
+
+.footer :focus-visible {
+  box-shadow: 0 0 0 3px var(--green-950), 0 0 0 5px var(--lime);
+}
+
+.inner {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 56rem) {
+  .inner {
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+  }
+}
+
+.brand {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.name {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--on-green);
+  margin-bottom: 0.25rem;
+}
+
+.fine {
+  line-height: 1.6;
+}

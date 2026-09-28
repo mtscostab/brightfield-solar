@@ -1,0 +1,596 @@
+.hero {
+  position: relative;
+  padding-top: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  padding-bottom: clamp(3rem, 2rem + 3vw, 4.5rem);
+  overflow: hidden;
+}
+
+/* Soft warm wash behind the hero. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(closest-side, rgb(246 180 75 / 0.16), transparent);
+  pointer-events: none;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  gap: clamp(2.5rem, 2rem + 3vw, 4rem);
+  align-items: center;
+}
+
+.copy {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: start;
+}
+
+.title {
+  font-size: var(--step-4);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--green-950);
+  font-variation-settings: "opsz" 144;
+}
+
+.title em {
+  display: block;
+  margin-top: 0.1em;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--green-700);
+}
+
+.lede {
+  max-width: 36rem;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.actions > a {
+  flex: 1 1 15rem;
+}
+
+.reassure {
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+
+.visual {
+  position: relative;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.artWrap {
+  border-radius: var(--radius-lg);
+}
+
+.art {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 560;
+  border-radius: var(--radius-lg);
+}
+
+.chip {
+  position: absolute;
+  max-width: 13.5rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: 14px;
+  background: rgb(255 253 248 / 0.94);
+  box-shadow: var(--shadow-md);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.chip strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--green-900);
+  line-height: 1.1;
+}
+
+.chipTop {
+  top: 1rem;
+  left: 1rem;
+}
+
+.chipBottom {
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: clamp(2.5rem, 2rem + 2vw, 4rem) 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.25rem;
+  padding: 1.25rem 1rem 0 0;
+}
+
+.statValue {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--step-3);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--green-900);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.star {
+  color: var(--coral-ink);
+  fill: currentColor;
+}
+
+.statLabel {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  line-height: 1.4;
+  max-width: 14rem;
+}
+
+@media (min-width: 48rem) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .stat + .stat {
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--line);
+  }
+
+  .actions > a {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .stat:nth-child(even) {
+    padding-left: 1rem;
+    border-left: 1px solid var(--line);
+  }
+}
+
+@media (min-width: 64rem) {
+  .grid {
+    grid-template-columns: 1.08fr 1fr;
+  }
+
+  .chipTop {
+    left: -1.5rem;
+    top: 2rem;
+  }
+
+  .chipBottom {
+    right: -1rem;
+    bottom: 2.5rem;
+  }
+
+  .chipBill {
+    top: 40%;
+    right: -2rem;
+  }
+}
+
+/* ---------- "Your bill, before and after" chip ---------- */
+
+.chipBill {
+  display: none;
+  min-width: 12.5rem;
+}
+
+@media (min-width: 36rem) {
+  .chipBill {
+    display: block;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+.billTitle {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+.bills {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.bills > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 0.75rem;
+  align-items: baseline;
+}
+
+.bills dt {
+  font-size: 0.8rem;
+}
+
+.bills dd {
+  display: contents;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--green-900);
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  height: 6px;
+  margin-top: 0.25rem;
+  border-radius: 999px;
+  background: var(--coral);
+}
+
+.barAfter {
+  width: var(--to);
+  background: var(--green-700);
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ----- Entrance ----- */
+  .copy > * {
+    animation: heroIn 900ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 110ms + 80ms);
+  }
+
+  .artWrap {
+    animation: artIn 1100ms var(--ease-out) both;
+  }
+
+  .chip {
+    animation:
+      chipIn 800ms var(--ease-spring) both,
+      bob 6s ease-in-out infinite;
+    animation-delay:
+      calc(900ms + var(--i, 0) * 250ms),
+      calc(2s + var(--i, 0) * 900ms);
+  }
+
+  .pin {
+    animation: pinDrop 900ms var(--ease-spring) 300ms both;
+  }
+
+  /* The promise gets a warm underline, drawn once. */
+  .swash {
+    background-image: linear-gradient(90deg, rgb(246 180 75 / 0.6), rgb(239 106 67 / 0.45));
+    background-repeat: no-repeat;
+    background-position: 0 90%;
+    background-size: 0% 0.16em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    animation: swash 1200ms var(--ease-out) 1000ms forwards;
+  }
+
+  .barAfter {
+    animation: billDrop 7s var(--ease-out) 1.8s infinite;
+  }
+
+  /* ----- Pointer + scroll parallax ----- */
+  .hero::before {
+    translate: calc(var(--mx, 0) * 40px) calc(var(--my, 0) * 30px);
+  }
+
+  .visual {
+    transform: translateY(calc(var(--p, 0) * -36px));
+  }
+
+  .chipTop,
+  .chipBill,
+  .chipBottom {
+    transform: translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 10px));
+  }
+
+  .chipBill {
+    transform: translate(calc(var(--mx, 0) * 18px), calc(var(--my, 0) * 14px));
+  }
+
+  .art :global(.ha-layer) {
+    transform: translate(calc(var(--mx, 0) * var(--d) * -0.6px), calc(var(--my, 0) * var(--d) * -0.4px));
+  }
+
+  /* The sun sinks behind the ridge as the page scrolls on. */
+  .art :global(.ha-sunlayer) {
+    transform: translate(
+      calc(var(--mx, 0) * var(--d) * -0.6px),
+      calc(var(--my, 0) * var(--d) * -0.4px + var(--p, 0) * -90px)
+    );
+  }
+
+  /* ----- The story in the art ----- */
+  .art :global(.ha-sun) {
+    transform-origin: 430px 168px;
+    animation: sunPulse 7s ease-in-out infinite;
+  }
+
+  .art :global(.ha-orbit) {
+    transform-origin: 430px 168px;
+    animation: spin 60s linear infinite;
+  }
+
+  .art :global(.ha-orbit-rev) {
+    animation-duration: 90s;
+    animation-direction: reverse;
+  }
+
+  /* 1. Panels are installed one by one. */
+  .art :global(.ha-panel) {
+    animation: panelIn 700ms var(--ease-spring) both;
+    animation-delay: calc(500ms + var(--i, 0) * 80ms);
+  }
+
+  /* 2. Sunlight streams onto them. */
+  .art :global(.ha-ray) {
+    stroke-opacity: 0.6;
+    animation:
+      rayFlow 1.4s linear infinite,
+      fadeIn 700ms ease 1.3s both;
+    animation-delay: calc(var(--i, 0) * -300ms), 1.3s;
+  }
+
+  .art :global(.ha-beam) {
+    animation: beam 5s ease-in-out infinite;
+  }
+
+  /* 3. Each panel charges, in a wave across the array. */
+  .art :global(.ha-charge) {
+    animation: charge 4s ease-in-out infinite;
+    animation-delay: calc(1.9s + var(--w, 0) * 140ms);
+  }
+
+  .art :global(.ha-glint) {
+    animation: glintSweep 6s var(--ease-out) 2.2s infinite;
+  }
+
+  .art :global(.ha-spark) {
+    opacity: 0;
+    animation: spark 4.5s ease-out infinite;
+  }
+
+  /* 4. Energy runs down to the meter and the house lights up. */
+  .art :global(.ha-flow) {
+    animation:
+      flow 900ms linear infinite,
+      fadeIn 600ms ease 1.8s both;
+  }
+
+  .art :global(.ha-meter) {
+    animation: blink 1.8s ease-in-out 2s infinite;
+  }
+
+  .art :global(.ha-window) {
+    animation: windowOn 4s ease-in-out 2.2s infinite;
+  }
+
+  .art :global(.ha-window-side) {
+    animation-name: windowOnSide;
+  }
+
+  .star {
+    transition: transform 400ms var(--ease-spring);
+  }
+
+  .stat:hover .star {
+    transform: rotate(72deg) scale(1.2);
+  }
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+@keyframes artIn {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@keyframes chipIn {
+  from {
+    opacity: 0;
+    scale: 0.85;
+    translate: 0 14px;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes pinDrop {
+  from {
+    opacity: 0;
+    translate: 0 -12px;
+  }
+}
+
+@keyframes swash {
+  to {
+    background-size: 100% 0.16em;
+  }
+}
+
+@keyframes billDrop {
+  0%,
+  8% {
+    width: 100%;
+  }
+  30%,
+  88% {
+    width: var(--to);
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rayFlow {
+  to {
+    stroke-dashoffset: -38;
+  }
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+@keyframes beam {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes charge {
+  0%,
+  50%,
+  100% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes glintSweep {
+  0% {
+    transform: translate(-70px, 24px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.3;
+  }
+  55%,
+  100% {
+    transform: translate(220px, -75px);
+    opacity: 0;
+  }
+}
+
+@keyframes spark {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes windowOn {
+  0%,
+  100% {
+    fill: #1f5c47;
+  }
+  35%,
+  75% {
+    fill: #f6b44b;
+  }
+}
+
+@keyframes windowOnSide {
+  0%,
+  100% {
+    fill: #bfb198;
+  }
+  35%,
+  75% {
+    fill: #ffe3a3;
+  }
+}
