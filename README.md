@@ -209,7 +209,11 @@ não é o único sinal.
 - O crédito de energia excedente é descrito de forma genérica ("vira crédito, não dinheiro"), sem
   citar as regras de exportação da APS.
 - Empresa, equipes, depoimentos e telefone (555) são fictícios, e o rodapé diz isso.
-- `/api/analytics` só registra o evento; não há fila, persistência nem deduplicação.
+- `/api/analytics` só registra o evento; não há fila, persistência nem deduplicação. O rate limit
+  (60 eventos/min por IP) é em memória e por instância: em serverless é *best-effort*. Para garantia
+  real, use um store compartilhado (Upstash/KV) ou as regras de rate limit do WAF da Vercel.
+- A CSP é estática (`next.config.ts`) para manter o SSG, então `script-src` precisa de `'unsafe-inline'`
+  por causa dos scripts inline do Next.js. Uma CSP com nonce exigiria renderização dinâmica.
 - A captura de UTMs é *last-touch* por sessão (`sessionStorage`). Uma atribuição *first-touch* entre
   sessões exigiria cookie ou armazenamento persistente, o que pede consentimento.
 - `JsonLd` não publica `aggregateRating`: sem uma fonte de avaliações verificável, o Google trata isso
@@ -247,8 +251,8 @@ depois que o simulador reescreve a query, depois de recarregar a página e no re
 
 **Transporte:** `navigator.sendBeacon` para `/api/analytics`, que sobrevive ao unload e ao toque em
 `tel:`. Se não houver beacon, usa `fetch(..., { keepalive: true })`. Uma falha no analytics nunca
-quebra a página. A rota valida o payload (tamanho ≤ 8 KB, JSON válido, guard de tipo) e responde
-`202`, `400`, `413` ou `422`.
+quebra a página. A rota aplica rate limit por IP e valida o payload (tamanho ≤ 8 KB, JSON válido,
+guard de tipo); responde `202`, `400`, `413`, `422` ou `429`.
 
 **Trocar por Segment, PostHog ou GA4:** basta registrar um transport. Nenhum componente muda.
 
@@ -339,7 +343,8 @@ pode continuar ativo como log de servidor.
 - [ ] Confirmar que o telefone real (sem 555) e os dados da cidade foram revisados por negócio e jurídico
       (créditos fiscais!).
 - [ ] Monitorar erros no cliente (Sentry ou similar) e a taxa de 4xx em `/api/analytics`.
-- [ ] Headers de segurança e cache (CSP, HSTS) na borda.
+- [ ] Headers de segurança: CSP, HSTS, `X-Content-Type-Options` e `Referrer-Policy` já saem de
+      `next.config.ts`; validar no domínio final (ex.: securityheaders.com) e revisar o cache na borda.
 
 ---
 

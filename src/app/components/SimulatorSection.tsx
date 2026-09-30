@@ -26,8 +26,8 @@ export function SimulatorSection({ city }: { city: CityContent }) {
           <p className="eyebrow">Savings simulator</p>
           <h2 id="estimate-title">What would solar save you in {city.city}?</h2>
           <p>
-            Move the sliders and every number updates instantly. Nothing is saved or sent to a salesperson &mdash; it&rsquo;s
-            your math to check.
+            Move the sliders and every number updates instantly. We don&rsquo;t ask for your contact details, and we use anonymous usage analytics to improve this calculator.
+            It&rsquo;s your math to check.
           </p>
         </header>
         <div data-reveal="scale">

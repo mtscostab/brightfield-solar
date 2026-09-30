@@ -387,8 +387,8 @@ function SimulatorForm({ city, initial }: { city: SimulatorCity; initial: { bill
         </details>
 
         <div className={styles.resultActions}>
-          <a href="#quote" className="btn btn-cta" data-cta="simulator_quote" data-cta-location="simulator">
-            Turn this into a written quote
+          <a href="#quote" className="btn btn-cta" data-cta="simulator_crew_lead" data-cta-location="simulator">
+            Talk to a local crew lead
             <ArrowRight size={18} aria-hidden="true" />
           </a>
           <ShareButton cta="simulator_share" location="simulator" city={city.city} variant="light" />
