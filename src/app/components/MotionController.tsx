@@ -20,6 +20,14 @@ import { useEffect } from "react";
 export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
+    // A plain page load should begin at the hero even if the browser restores
+    // an old scroll position. Keep explicit section links such as #faq intact.
+    if (!window.location.hash && window.scrollY > 0) {
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = previousScrollBehavior;
+    }
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
